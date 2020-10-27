@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.StageStyle;
+import org.una.examen.cliente.controller.util.FlowController;
 
 /**
  * FXML Controller class
@@ -31,6 +33,7 @@ public class PrincipalController extends Controller implements Initializable {
 
     @FXML
     private void actTareas(ActionEvent event) {
+        FlowController.getInstance().goViewInNoResizableWindow("Proyectos", false, StageStyle.UTILITY);
     }
 
     @FXML
