@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27 oct 2020, 1:58:59
+    Author     : Ivan Josué Arias Astua
+*/
+
+.raiz{
+    -fx-background-color: #d3d3d3;
+}
+
+.botonPrincipal{
+    -fx-background-color: #da6312;
+    -fx-text-fill: white;
+    -fx-font: bold italic 35px "Courier";
+    -fx-border-color: #fa8e44;
+    -fx-border-width:  0 0 8 8;
+    -fx-background-radius: 0 25 0 25;
+    -fx-border-radius: 0 25 0 25;
+}
+
