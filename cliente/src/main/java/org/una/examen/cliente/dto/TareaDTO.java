@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 public class TareaDTO {
     
     private Long id;
+    private String nombre;
     private String descripcion;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaInicio;

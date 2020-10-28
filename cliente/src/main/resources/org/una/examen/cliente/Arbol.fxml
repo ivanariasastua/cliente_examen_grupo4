@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.ArbolController">
+   <children>
+      <TreeView fx:id="treeV" layoutX="14.0" layoutY="14.0" prefHeight="542.0" prefWidth="523.0" />
+   </children>
+</AnchorPane>

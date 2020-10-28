@@ -36,7 +36,7 @@ public class ProyectoService {
 
     public Respuesta guardarProyecto(ProyectoDTO proyecto) {
         try {
-            Request request = new Request("proyectos/save");
+            Request request = new Request("http://localhost:8989/proyectos/save");
             request.post(proyecto);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo guardar el proyecto");
@@ -52,7 +52,7 @@ public class ProyectoService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("proyectos/editar", "/{id}", parametros);
+            Request request = new Request("http://localhost:8989/proyectos/editar", "/{id}", parametros);
             request.put(proyecto);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo modificar el proyecto");
@@ -68,7 +68,7 @@ public class ProyectoService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("proyectos", "/{id}", parametros);
+            Request request = new Request("http://localhost:8989/proyectos/", "/{id}", parametros);
             request.delete();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo eliminar el proyecto");
