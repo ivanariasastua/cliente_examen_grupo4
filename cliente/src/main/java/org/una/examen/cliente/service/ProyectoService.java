@@ -68,7 +68,7 @@ public class ProyectoService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("http://localhost:8989/proyectos/", "/{id}", parametros);
+            Request request = new Request("http://localhost:8989/proyectos", "/{id}", parametros);
             request.delete();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo eliminar el proyecto");

@@ -8,22 +8,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="550.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="org.una.examen.cliente.controller.InfoTareaController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="550.0" styleClass="raiz" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.InfoTareaController">
    <children>
-      <Label layoutX="224.0" layoutY="14.0" prefHeight="45.0" prefWidth="143.0" text="Tareas">
+      <Label layoutX="222.0" layoutY="2.0" prefHeight="53.0" prefWidth="123.0" text="Tareas">
          <font>
-            <Font size="30.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtNombre" labelFloat="true" layoutX="139.0" layoutY="100.0" prefHeight="25.0" prefWidth="273.0" promptText="Nombre" />
-      <JFXTextField fx:id="txtImportancia" labelFloat="true" layoutX="139.0" layoutY="226.0" prefHeight="25.0" prefWidth="273.0" promptText="Importancia" />
-      <JFXTextArea fx:id="txtDescripcion" labelFloat="true" layoutX="139.0" layoutY="460.0" prefHeight="45.0" prefWidth="273.0" promptText="Descripcion" />
-      <JFXComboBox fx:id="cbxProyecto" labelFloat="true" layoutX="139.0" layoutY="160.0" prefHeight="25.0" prefWidth="273.0" promptText="Proyecto" />
-      <JFXTextField fx:id="txtUrgencia" labelFloat="true" layoutX="139.0" layoutY="289.0" prefHeight="25.0" prefWidth="273.0" promptText="Urgencia" />
-      <JFXTextField fx:id="txtPrioridad" editable="false" labelFloat="true" layoutX="139.0" layoutY="353.0" prefHeight="25.0" prefWidth="273.0" promptText="Prioridad" />
-      <JFXTextField fx:id="txtPorcentaje" editable="false" labelFloat="true" layoutX="139.0" layoutY="411.0" prefHeight="25.0" prefWidth="273.0" promptText="Porcentaje de Avance" />
-      <JFXButton layoutX="461.0" layoutY="554.0" onAction="#actGuardar" prefHeight="32.0" prefWidth="72.0" text="Guardar" />
-      <JFXButton layoutX="360.0" layoutY="554.0" onAction="#actLiimpiar" prefHeight="32.0" prefWidth="72.0" text="Limpiar" />
+      <JFXTextField fx:id="txtNombre" labelFloat="true" layoutX="52.0" layoutY="127.0" prefHeight="25.0" prefWidth="204.0" promptText="Nombre" />
+      <JFXTextField fx:id="txtImportancia" labelFloat="true" layoutX="52.0" layoutY="211.0" prefHeight="25.0" prefWidth="204.0" promptText="Importancia" />
+      <JFXTextArea fx:id="txtDescripcion" labelFloat="true" layoutX="52.0" layoutY="450.0" prefHeight="53.0" prefWidth="441.0" promptText="Descripcion" />
+      <JFXComboBox fx:id="cbxProyecto" labelFloat="true" layoutX="285.0" layoutY="127.0" prefHeight="25.0" prefWidth="204.0" promptText="Proyecto" />
+      <JFXTextField fx:id="txtUrgencia" labelFloat="true" layoutX="285.0" layoutY="211.0" prefHeight="25.0" prefWidth="204.0" promptText="Urgencia" />
+      <JFXTextField fx:id="txtPrioridad" editable="false" labelFloat="true" layoutX="52.0" layoutY="288.0" prefHeight="25.0" prefWidth="204.0" promptText="Prioridad" />
+      <JFXTextField fx:id="txtPorcentaje" labelFloat="true" layoutX="285.0" layoutY="288.0" prefHeight="25.0" prefWidth="204.0" promptText="Porcentaje de Avance" />
+      <JFXButton fx:id="btnEliminar" layoutX="281.0" layoutY="559.0" onAction="#actEliminar" prefHeight="32.0" prefWidth="123.0" styleClass="boton1" text="Eliminar" />
+      <JFXButton layoutX="471.0" layoutY="5.0" onAction="#actLiimpiar" prefHeight="30.0" prefWidth="74.0" styleClass="boton1" text="Limpiar" />
+      <JFXButton layoutX="417.0" layoutY="559.0" onAction="#actGuardar" prefHeight="32.0" prefWidth="123.0" styleClass="boton1" text="Guardar" />
+      <JFXTextField fx:id="txtfechaIni" editable="false" labelFloat="true" layoutX="52.0" layoutY="378.0" prefHeight="25.0" prefWidth="204.0" promptText="Fecha de Inicio" />
+      <JFXTextField fx:id="txtFechaFin" editable="false" labelFloat="true" layoutX="285.0" layoutY="378.0" prefHeight="25.0" prefWidth="204.0" promptText="Fecha de Finalizacion" />
+      <JFXButton layoutX="113.0" layoutY="316.0" onAction="#actCalcularPrioridad" prefHeight="30.0" prefWidth="82.0" styleClass="boton1" text="Calcular" />
    </children>
 </AnchorPane>

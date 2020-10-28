@@ -10,6 +10,7 @@ import javax.json.bind.annotation.JsonbDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  *
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor 
+@ToString
 public class TareaDTO {
     
     private Long id;
@@ -29,6 +31,6 @@ public class TareaDTO {
     private Date fechaFinalizacion;
     private Integer importancia;
     private Integer urgencia;
-    private Float porcentajeAvance;
+    private Integer porcentajeAvance;
     private ProyectoDTO proyecto;
 }
