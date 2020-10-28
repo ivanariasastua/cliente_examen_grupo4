@@ -33,6 +33,7 @@ public class InicioController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        FlowController.getInstance().goViewPanel(vbox, "Arbol");
     }    
 
     @FXML

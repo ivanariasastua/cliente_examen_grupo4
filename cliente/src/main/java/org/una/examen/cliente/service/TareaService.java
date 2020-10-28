@@ -18,7 +18,7 @@ public class TareaService {
 
     public Respuesta guardarTarea(TareaDTO tarea) {
         try {
-            Request request = new Request("tareas/save");
+            Request request = new Request("http://localhost:8989/tareas/save/");
             request.post(tarea);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo guardar la tarea");
@@ -34,7 +34,7 @@ public class TareaService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("tareas/editar", "/{id}", parametros);
+            Request request = new Request("http://localhost:8989/tareas/editar", "/{id}", parametros);
             request.put(tarea);
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo modificar la tarea");
@@ -50,7 +50,7 @@ public class TareaService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("tareas", "/{id}", parametros);
+            Request request = new Request("http://localhost:8989/tareas", "/{id}", parametros);
             request.delete();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "No se pudo eliminar la tarea");

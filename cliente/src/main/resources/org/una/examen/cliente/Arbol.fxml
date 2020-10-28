@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.ArbolController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="570.0" styleClass="raiz" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.ArbolController">
    <children>
-      <TreeView fx:id="treeV" layoutX="14.0" layoutY="14.0" prefHeight="542.0" prefWidth="523.0" />
+      <TreeView fx:id="treeV" layoutX="11.0" layoutY="11.0" prefHeight="579.0" prefWidth="548.0" style="-fx-background-color: #d3d3d3;">
+         <effect>
+            <InnerShadow />
+         </effect></TreeView>
    </children>
 </AnchorPane>

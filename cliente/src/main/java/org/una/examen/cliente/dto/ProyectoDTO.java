@@ -30,4 +30,9 @@ public class ProyectoDTO {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaFinalizacion;
     private List<TareaDTO> tarea = new ArrayList<>();
+    
+    @Override
+    public String toString(){
+        return nombre;
+    }
 }
