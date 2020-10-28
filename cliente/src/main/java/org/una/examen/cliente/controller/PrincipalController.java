@@ -45,6 +45,8 @@ public class PrincipalController extends Controller implements Initializable {
 
     @FXML
     private void actCobros(ActionEvent event) {
+        this.closeWindow();
+        FlowController.getInstance().goViewInNoResizableWindow("CobroPendiente", false, StageStyle.UTILITY);
     }
     
 }
