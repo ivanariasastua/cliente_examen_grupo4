@@ -103,7 +103,7 @@ public class InfoProyectoController extends Controller implements Initializable 
         if (Mensaje.showConfirmation("Eliminar proyecto", null, "Desea eliminar el proyecto?")) {
             Respuesta res = proyService.deleteProyecto(proySelec.getId());
             if (res.getEstado()) {
-                Mensaje.show(Alert.AlertType.INFORMATION, "Eliminado", "Proyecto eliminada correctamente");
+                Mensaje.show(Alert.AlertType.INFORMATION, "Eliminado", "Proyecto eliminado correctamente");
                 limpiar();
             } else {
                 Mensaje.show(Alert.AlertType.ERROR, "Error", res.getMensaje());

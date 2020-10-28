@@ -47,6 +47,12 @@ and open the template in the editor.
     -fx-font: bold italic 14px "Courier";
 }
 
+.boton1:hover{
+    -fx-background-color: #da8b56;
+    -fx-text-fill: white;
+    -fx-font: bold italic 14px "Courier";
+}
+
 .tab:selected {
     -fx-background-color:#fa8e44 ;
     -fx-focus-color: null;

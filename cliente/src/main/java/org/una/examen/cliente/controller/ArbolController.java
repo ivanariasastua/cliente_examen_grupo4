@@ -78,7 +78,6 @@ public class ArbolController extends Controller implements Initializable {
         b.setOnMouseClicked(x -> {
             if (tarea.getNombre() != null) {
                 try {
-                    System.out.println(tarea.getProyecto());
                     FXMLLoader loader = new FXMLLoader(App.class.getResource("InfoTarea.fxml"));
                     Parent root = loader.load();
                     Stage stage = new Stage();

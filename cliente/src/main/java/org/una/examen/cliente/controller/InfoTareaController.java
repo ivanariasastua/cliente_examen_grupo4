@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
+import org.una.examen.cliente.controller.util.Formato;
 import org.una.examen.cliente.controller.util.Mensaje;
 import org.una.examen.cliente.controller.util.Respuesta;
 import org.una.examen.cliente.service.TareaService;
@@ -69,12 +70,18 @@ public class InfoTareaController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        txtImportancia.setTextFormatter(Formato.getInstance().integerFormat());
+        txtUrgencia.setTextFormatter(Formato.getInstance().integerFormat());
+        txtPorcentaje.setTextFormatter(Formato.getInstance().integerFormat());
         llenarComboBox();
 
     }
 
     @Override
     public void initialize() {
+        txtImportancia.setTextFormatter(Formato.getInstance().integerFormat());
+        txtUrgencia.setTextFormatter(Formato.getInstance().integerFormat());
+        txtPorcentaje.setTextFormatter(Formato.getInstance().integerFormat());
         selec = false;
         btnEliminar.setVisible(false);
         llenarComboBox();
@@ -84,7 +91,6 @@ public class InfoTareaController extends Controller implements Initializable {
         Respuesta res = proyService.getAll();
         if (res.getEstado()) {
             proyectos = (List<ProyectoDTO>) res.getResultado("Proyectos");
-            System.out.println(proyectos);
             ObservableList<ProyectoDTO> item = FXCollections.observableArrayList(proyectos);
             cbxProyecto.setItems(item);
         }
@@ -165,10 +171,10 @@ public class InfoTareaController extends Controller implements Initializable {
         txtNombre.setText(tarea.getNombre());
         txtPorcentaje.setText(String.valueOf(tarea.getPorcentajeAvance()));
         cbxProyecto.setValue(tarea.getProyecto());
-        //  txtPrioridad.setText(String.valueOf(tarea.));
         txtUrgencia.setText(String.valueOf(tarea.getUrgencia()));
         txtfechaIni.setText(tarea.getFechaInicio().toString());
         txtFechaFin.setText(tarea.getFechaFinalizacion().toString());
+        txtPrioridad.setText(multiplicarValores());
     }
 
     @FXML
@@ -195,16 +201,24 @@ public class InfoTareaController extends Controller implements Initializable {
         return true;
     }
 
+    public String multiplicarValores() {
+        Integer num1 = Integer.valueOf(txtImportancia.getText());
+        Integer num2 = Integer.valueOf(txtUrgencia.getText());
+        Integer resultado = num1 * num2;
+        return String.valueOf(resultado);
+    }
+
     @FXML
     private void actCalcularPrioridad(ActionEvent event) {
         if (calcularPriorid()) {
             Integer num1 = Integer.valueOf(txtImportancia.getText());
             Integer num2 = Integer.valueOf(txtUrgencia.getText());
             Integer resultado = num1 * num2;
-            txtPrioridad.setText(String.valueOf(resultado));
+            txtPrioridad.setText(multiplicarValores());
         } else {
             Mensaje.show(Alert.AlertType.WARNING, "Campos requeridos", "Es necesario ingresar importancia y urgencia");
         }
     }
+
 
 }

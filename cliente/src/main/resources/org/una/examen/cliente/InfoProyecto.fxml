@@ -8,35 +8,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane" prefHeight="600.0" prefWidth="550.0" styleClass="raiz" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.InfoProyectoController">
+<BorderPane fx:id="pane" prefHeight="600.0" prefWidth="570.0" styleClass="raiz" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.InfoProyectoController">
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
             <AnchorPane prefHeight="600.0" prefWidth="550.0">
                <children>
-                  <Label focusTraversable="false" layoutX="194.0" layoutY="21.0" prefHeight="25.0" prefWidth="165.0" text="Proyectos">
+                  <Label focusTraversable="false" layoutX="215.0" layoutY="15.0" prefHeight="25.0" prefWidth="165.0" text="Proyectos" textFill="#da6312">
                      <font>
-                        <Font size="35.0" />
+                        <Font name="System Bold" size="35.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtfechaIni" alignment="TOP_CENTER" editable="false" focusTraversable="false" labelFloat="true" layoutX="142.0" layoutY="270.0" prefHeight="25.0" prefWidth="265.0" promptText="Fecha Inicio">
+                  <JFXTextField fx:id="txtfechaIni" alignment="TOP_CENTER" editable="false" focusColor="#da6312" focusTraversable="false" labelFloat="true" layoutX="163.0" layoutY="264.0" prefHeight="25.0" prefWidth="265.0" promptText="Fecha Inicio">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtfechaFin" alignment="TOP_CENTER" editable="false" focusTraversable="false" labelFloat="true" layoutX="144.0" layoutY="362.0" prefHeight="25.0" prefWidth="265.0" promptText="Fecha de Finalización">
+                  <JFXTextField fx:id="txtfechaFin" alignment="TOP_CENTER" editable="false" focusColor="#da6312" focusTraversable="false" labelFloat="true" layoutX="164.0" layoutY="361.0" prefHeight="25.0" prefWidth="265.0" promptText="Fecha de Finalización">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton layoutX="173.0" layoutY="498.0" onAction="#actGuardar" prefHeight="38.0" prefWidth="203.0" styleClass="boton1" stylesheets="@Tema.css" text="Guardar" />
-                  <JFXTextField fx:id="txtNombre" alignment="TOP_CENTER" labelFloat="true" layoutX="142.0" layoutY="180.0" prefHeight="25.0" prefWidth="265.0" promptText="Nombre">
+                  <JFXButton layoutX="195.0" layoutY="492.0" onAction="#actGuardar" prefHeight="38.0" prefWidth="203.0" styleClass="boton1" stylesheets="@Tema.css" text="Guardar" />
+                  <JFXTextField fx:id="txtNombre" alignment="TOP_CENTER" focusColor="#da6312" labelFloat="true" layoutX="164.0" layoutY="170.0" prefHeight="25.0" prefWidth="265.0" promptText="Nombre">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton fx:id="btnEliminar" layoutX="175.0" layoutY="548.0" onAction="#actEliminar" prefHeight="38.0" prefWidth="203.0" styleClass="boton1" stylesheets="@Tema.css" text="Eliminar" visible="false" />
-                  <JFXButton layoutX="468.0" layoutY="6.0" onAction="#actLimpiar" prefHeight="30.0" prefWidth="76.0" styleClass="boton1" stylesheets="@Tema.css" text="Limpiar" />
+                  <JFXButton fx:id="btnEliminar" layoutX="195.0" layoutY="542.0" onAction="#actEliminar" prefHeight="38.0" prefWidth="203.0" styleClass="boton1" stylesheets="@Tema.css" text="Eliminar" visible="false" />
+                  <JFXButton layoutX="489.0" layoutY="5.0" onAction="#actLimpiar" prefHeight="30.0" prefWidth="76.0" styleClass="boton1" stylesheets="@Tema.css" text="Limpiar" />
                </children>
             </AnchorPane>
          </children>
