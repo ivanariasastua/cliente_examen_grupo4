@@ -27,7 +27,7 @@ public class ClienteService {
         }
     }
     
-    /*
+    
     public Respuesta getAll(){
         try{
             Request request = new Request("http://localhost:8989/clientes/");
@@ -40,5 +40,5 @@ public class ClienteService {
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No se estableció conexión con el servidor");
         }
-    }*/
+    }
 }

@@ -30,7 +30,7 @@ public class CobroPendienteService {
         }
     }
     
-    /*
+    
     public Respuesta obtenerPorCliente(Long id){
         try{
             Map<String, Object> parametros = new HashMap();
@@ -46,5 +46,5 @@ public class CobroPendienteService {
             return new Respuesta(false, ex.toString(), "No se estableció conexión con la base de datos");
         }
         
-    }*/
+    }
 }
