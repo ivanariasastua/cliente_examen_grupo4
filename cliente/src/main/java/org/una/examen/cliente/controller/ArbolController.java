@@ -59,6 +59,8 @@ public class ArbolController extends Controller implements Initializable {
     final String naranja = "-fx-background-color: #e7b085;";
     final String amarillo = "-fx-background-color: #ffff9a;";
     final String verde = "-fx-background-color: #8fe79f;";
+    final String celeste = "-fx-background-color: #88d9e7;";
+    final String morado = "-fx-background-color: #ad96f8;";
     @FXML
     private Pane pane;
     @FXML
@@ -81,7 +83,7 @@ public class ArbolController extends Controller implements Initializable {
 
     public void llenarComboBox() {
         List<Integer> num = new ArrayList<>();
-        ObservableList<String> colores = FXCollections.observableArrayList("Rojo", "Naranja", "Amarillo", "Verde");
+        ObservableList<String> colores = FXCollections.observableArrayList("Rojo", "Naranja", "Amarillo", "Verde", "Celeste","Morado");
         cbxColores.setItems(colores);
         for (Integer i = 0; i <= 100; i += 10) {
             num.add(i);
@@ -202,8 +204,12 @@ public class ArbolController extends Controller implements Initializable {
             return naranja;
         } else if (cbxColores.getValue().equals("Amarillo")) {
             return amarillo;
+        } else if (cbxColores.getValue().equals("Verde")) {
+            return verde;
+        }else if (cbxColores.getValue().equals("Celeste")) {
+            return celeste;
         }
-        return verde;
+        return morado;
     }
 
     @FXML

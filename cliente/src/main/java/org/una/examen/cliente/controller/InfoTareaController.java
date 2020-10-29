@@ -10,7 +10,9 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,7 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.DatePicker;
 import org.una.examen.cliente.controller.util.Formato;
 import org.una.examen.cliente.controller.util.Mensaje;
 import org.una.examen.cliente.controller.util.Respuesta;
@@ -57,9 +59,9 @@ public class InfoTareaController extends Controller implements Initializable {
     @FXML
     private JFXButton btnEliminar;
     @FXML
-    private JFXTextField txtfechaIni;
+    private DatePicker txtfechaIni;
     @FXML
-    private JFXTextField txtFechaFin;
+    private DatePicker txtFechaFin;
 
     TareaDTO tarSelec = new TareaDTO();
     boolean selec = false;
@@ -107,6 +109,10 @@ public class InfoTareaController extends Controller implements Initializable {
                 tarSelec.setProyecto(cbxProyecto.getValue());
                 tarSelec.setUrgencia(Integer.valueOf(txtUrgencia.getText()));
                 tarSelec.setNombre(txtNombre.getText());
+                Date fin = DateUtils.asDate(txtFechaFin.getValue());
+                Date ini = DateUtils.asDate(txtfechaIni.getValue());
+                tarSelec.setFechaFinalizacion(fin);
+                tarSelec.setFechaInicio(ini);
                 Respuesta res = tareaService.modificarTarea(tarSelec.getId(), tarSelec);
                 if (res.getEstado()) {
                     Mensaje.show(Alert.AlertType.INFORMATION, "Editado", "Tarea editada correctamente");
@@ -122,6 +128,10 @@ public class InfoTareaController extends Controller implements Initializable {
                 tareaDTO.setProyecto(cbxProyecto.getValue());
                 tareaDTO.setUrgencia(Integer.valueOf(txtUrgencia.getText()));
                 tareaDTO.setNombre(txtNombre.getText());
+                Date fin = DateUtils.asDate(txtFechaFin.getValue());
+                Date ini = DateUtils.asDate(txtfechaIni.getValue());
+                tareaDTO.setFechaFinalizacion(fin);
+                tareaDTO.setFechaInicio(ini);
                 Respuesta res = tareaService.guardarTarea(tareaDTO);
                 if (res.getEstado()) {
                     Mensaje.show(Alert.AlertType.INFORMATION, "Guardado", "Tarea guardada correctamente");
@@ -134,8 +144,9 @@ public class InfoTareaController extends Controller implements Initializable {
     }
 
     public boolean validarCampos() {
-        if (txtImportancia.getText() == null || txtNombre.getText() == null || txtPorcentaje.getText() == null || txtUrgencia.getText() == null || cbxProyecto.getValue() == null) {
-            Mensaje.show(Alert.AlertType.WARNING, "Campos requeridos", "Los siguientes campos son obligatorios \n*Nombre\n*Importancia\n*Urgencia\n*Porcentaje\n*Proyecto");
+        if (txtImportancia.getText() == null || txtNombre.getText() == null || txtPorcentaje.getText() == null || txtUrgencia.getText() == null || cbxProyecto.getValue() == null
+                || txtfechaIni.getValue() == null) {
+            Mensaje.show(Alert.AlertType.WARNING, "Campos requeridos", "Los siguientes campos son obligatorios \n*Nombre\n*Importancia\n*Urgencia\n*Porcentaje\n*Proyecto\n*Fecha de inicio");
             return false;
         }
         return true;
@@ -149,8 +160,8 @@ public class InfoTareaController extends Controller implements Initializable {
         txtPrioridad.setText(null);
         txtUrgencia.setText(null);
         cbxProyecto.setValue(null);
-        txtfechaIni.setText(null);
-        txtFechaFin.setText(null);
+        txtfechaIni.setValue(null);
+        txtFechaFin.setValue(null);
         tarSelec = new TareaDTO();
         tareaDTO = new TareaDTO();
         btnEliminar.setVisible(false);
@@ -172,8 +183,11 @@ public class InfoTareaController extends Controller implements Initializable {
         txtPorcentaje.setText(String.valueOf(tarea.getPorcentajeAvance()));
         cbxProyecto.setValue(proy);
         txtUrgencia.setText(String.valueOf(tarea.getUrgencia()));
-        txtfechaIni.setText(tarea.getFechaInicio().toString());
-        txtFechaFin.setText(tarea.getFechaFinalizacion().toString());
+        LocalDate ini = DateUtils.asLocalDate(tarea.getFechaInicio());
+        LocalDate fin = DateUtils.asLocalDate(tarea.getFechaFinalizacion());
+        System.out.println(ini);
+        txtfechaIni.setValue(ini);
+        txtFechaFin.setValue(fin);
         txtPrioridad.setText(multiplicarValores());
     }
 
@@ -219,6 +233,5 @@ public class InfoTareaController extends Controller implements Initializable {
             Mensaje.show(Alert.AlertType.WARNING, "Campos requeridos", "Es necesario ingresar importancia y urgencia");
         }
     }
-
 
 }
