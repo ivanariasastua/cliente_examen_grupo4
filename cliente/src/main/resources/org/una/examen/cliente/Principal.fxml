@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="500.0" styleClass="raiz" stylesheets="@Tema.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="org.una.examen.cliente.controller.PrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="500.0" styleClass="raiz" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.PrincipalController">
    <children>
       <GridPane layoutY="7.0" prefHeight="500.0" prefWidth="500.0">
         <columnConstraints>
@@ -19,9 +20,30 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton onAction="#actTareas" prefHeight="100.0" prefWidth="400.0" styleClass="botonPrincipal" text="7.1" />
-            <JFXButton layoutX="10.0" layoutY="81.0" onAction="#actProvincias" prefHeight="100.0" prefWidth="400.0" styleClass="botonPrincipal" text="7.2" GridPane.rowIndex="1" />
-            <JFXButton layoutX="10.0" layoutY="248.0" onAction="#actCobros" prefHeight="100.0" prefWidth="400.0" styleClass="botonPrincipal" text="7.3" GridPane.rowIndex="2" />
+            <JFXButton onAction="#actTareas" prefHeight="100.0" prefWidth="400.0" styleClass="botonPrincipal" text="Proyectos (7.1)">
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8-tarea-80.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton layoutX="10.0" layoutY="81.0" onAction="#actProvincias" prefHeight="100.0" prefWidth="400.0" styleClass="botonPrincipal" text="Población (7.2)" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8-código-de-región-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton layoutX="10.0" layoutY="248.0" onAction="#actCobros" prefHeight="100.0" prefWidth="400.0" styleClass="botonPrincipal" text="Cobros (7.3)    " GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8-etiqueta-de-precio-usd-80.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
          </children>
       </GridPane>
    </children>

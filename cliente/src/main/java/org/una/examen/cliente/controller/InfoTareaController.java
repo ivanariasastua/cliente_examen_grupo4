@@ -185,7 +185,6 @@ public class InfoTareaController extends Controller implements Initializable {
         txtUrgencia.setText(String.valueOf(tarea.getUrgencia()));
         LocalDate ini = DateUtils.asLocalDate(tarea.getFechaInicio());
         LocalDate fin = DateUtils.asLocalDate(tarea.getFechaFinalizacion());
-        System.out.println(ini);
         txtfechaIni.setValue(ini);
         txtFechaFin.setValue(fin);
         txtPrioridad.setText(multiplicarValores());
