@@ -162,7 +162,7 @@ public class InfoTareaController extends Controller implements Initializable {
         limpiar();
     }
 
-    public void cargarDatos(TareaDTO tarea) {
+    public void cargarDatos(TareaDTO tarea, ProyectoDTO proy) {
         tarSelec = tarea;
         selec = true;
         btnEliminar.setVisible(true);
@@ -170,7 +170,7 @@ public class InfoTareaController extends Controller implements Initializable {
         txtImportancia.setText(String.valueOf(tarea.getImportancia()));
         txtNombre.setText(tarea.getNombre());
         txtPorcentaje.setText(String.valueOf(tarea.getPorcentajeAvance()));
-        cbxProyecto.setValue(tarea.getProyecto());
+        cbxProyecto.setValue(proy);
         txtUrgencia.setText(String.valueOf(tarea.getUrgencia()));
         txtfechaIni.setText(tarea.getFechaInicio().toString());
         txtFechaFin.setText(tarea.getFechaFinalizacion().toString());

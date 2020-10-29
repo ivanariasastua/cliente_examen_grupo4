@@ -6,14 +6,20 @@
 package org.una.examen.cliente.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,7 +29,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.una.examen.cliente.App;
@@ -47,7 +55,20 @@ public class ArbolController extends Controller implements Initializable {
     private List<ProyectoDTO> proyectos;
 
     final String color = "-fx-background-color: #d3d3d3;";
-    
+    final String rojo = "-fx-background-color: #d38989;";
+    final String naranja = "-fx-background-color: #e7b085;";
+    final String amarillo = "-fx-background-color: #ffff9a;";
+    final String verde = "-fx-background-color: #8fe79f;";
+    @FXML
+    private Pane pane;
+    @FXML
+    private JFXComboBox<Integer> cbxIni;
+    @FXML
+    private JFXComboBox<Integer> cbxFin;
+    @FXML
+    private JFXComboBox<String> cbxColores;
+
+    HashMap<TareaDTO, JFXTextArea> textAreas = new HashMap<>();
 
     /**
      * Initializes the controller class.
@@ -55,6 +76,19 @@ public class ArbolController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        llenarComboBox();
+    }
+
+    public void llenarComboBox() {
+        List<Integer> num = new ArrayList<>();
+        ObservableList<String> colores = FXCollections.observableArrayList("Rojo", "Naranja", "Amarillo", "Verde");
+        cbxColores.setItems(colores);
+        for (Integer i = 0; i <= 100; i += 10) {
+            num.add(i);
+        }
+        ObservableList<Integer> item = FXCollections.observableArrayList(num);
+        cbxIni.setItems(item);
+        cbxFin.setItems(item);
     }
 
     @Override
@@ -62,8 +96,7 @@ public class ArbolController extends Controller implements Initializable {
         proyectos = new ArrayList<>();
         cargarArbol();
     }
-    
-    
+
     public String llenarNotas(TareaDTO tarea) {
         if (tarea != null) {
             return tarea.getNombre() + "\n\nFecha de inicio: " + tarea.getFechaInicio()
@@ -73,7 +106,7 @@ public class ArbolController extends Controller implements Initializable {
         return "";
     }
 
-    public void seleccionarTarea(JFXButton b, TareaDTO tarea) {
+    public void seleccionarTarea(JFXButton b, TareaDTO tarea, ProyectoDTO proy) {
         b.setStyle(color);
         b.setOnMouseClicked(x -> {
             if (tarea.getNombre() != null) {
@@ -84,31 +117,25 @@ public class ArbolController extends Controller implements Initializable {
                     stage.setScene(new Scene(root));
                     stage.show();
                     InfoTareaController editar = loader.getController();
-                    editar.cargarDatos(tarea);
+                    editar.cargarDatos(tarea, proy);
                 } catch (IOException ex) {
                     Logger.getLogger(ArbolController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
-    
-    public void asignarColores(TareaDTO tarea,JFXTextArea t){
-        final String fondo;
-        if(tarea.getPorcentajeAvance()>=0 && tarea.getPorcentajeAvance()<=20){
-            fondo = "-fx-background-color: #d38989;";
-            t.setStyle(fondo);
-        }else if(tarea.getPorcentajeAvance()>20 && tarea.getPorcentajeAvance()<=50){
-            fondo = "-fx-background-color: #e7b085;";
-            t.setStyle(fondo);
-        }else if(tarea.getPorcentajeAvance()>50 && tarea.getPorcentajeAvance()<=70){
-            fondo = "-fx-background-color: #ffff9a;";
-            t.setStyle(fondo);
-        }else if(tarea.getPorcentajeAvance()>70 && tarea.getPorcentajeAvance()<=100){
-            fondo = "-fx-background-color: #8fe79f;";
-            t.setStyle(fondo);
+
+    public void asignarColores(TareaDTO tarea, JFXTextArea t) {
+        if (tarea.getPorcentajeAvance() >= 0 && tarea.getPorcentajeAvance() <= 20) {
+            t.setStyle(rojo);
+        } else if (tarea.getPorcentajeAvance() > 20 && tarea.getPorcentajeAvance() <= 50) {
+            t.setStyle(naranja);
+        } else if (tarea.getPorcentajeAvance() > 50 && tarea.getPorcentajeAvance() <= 70) {
+            t.setStyle(amarillo);
+        } else if (tarea.getPorcentajeAvance() > 70 && tarea.getPorcentajeAvance() <= 100) {
+            t.setStyle(verde);
         }
     }
-
 
     public void cargarArbol() {
         Respuesta res = proyService.getAll();
@@ -130,8 +157,9 @@ public class ArbolController extends Controller implements Initializable {
                         tareas.stream().forEach(y -> {
                             VBox box = new VBox();
                             JFXButton boton = new JFXButton("Seleccionar Tarea");
-                            seleccionarTarea(boton, y);
+                            seleccionarTarea(boton, y, x);
                             JFXTextArea v = new JFXTextArea();
+                            textAreas.put(y, v);
                             asignarColores(y, v);
                             v.setEditable(false);
                             v.setText(llenarNotas(y));
@@ -165,6 +193,54 @@ public class ArbolController extends Controller implements Initializable {
                 }
             }
         });
+    }
+
+    public String cambiarColores() {
+        if (cbxColores.getValue().equals("Rojo")) {
+            return rojo;
+        } else if (cbxColores.getValue().equals("Naranja")) {
+            return naranja;
+        } else if (cbxColores.getValue().equals("Amarillo")) {
+            return amarillo;
+        }
+        return verde;
+    }
+
+    @FXML
+    private void actActualizarRangos(ActionEvent event) {
+        if (cbxColores.getValue() == null || cbxFin.getValue() == null || cbxIni.getValue() == null) {
+            Mensaje.show(Alert.AlertType.WARNING, "Campos requeridos", "Seleccione el rango y el color");
+        } else {
+            if (proyectos != null) {
+                proyectos.stream().forEach(x -> {
+                    List<TareaDTO> tareas = x.getTarea();
+                    if (tareas != null) {
+                        tareas.stream().forEach(y -> {
+                            if (y.getPorcentajeAvance() >= cbxIni.getValue() && y.getPorcentajeAvance() <= cbxFin.getValue()) {
+                                Platform.runLater(() -> {
+                                    JFXTextArea t = textAreas.get(y);
+                                    t.setStyle(cambiarColores());
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+    }
+
+    boolean aux = true;
+
+    @FXML
+    private void actAjustar(MouseEvent event) {
+        if (aux) {
+            pane.setVisible(true);
+            aux = false;
+        } else {
+            pane.setVisible(false);
+            aux = true;
+        }
     }
 
 }

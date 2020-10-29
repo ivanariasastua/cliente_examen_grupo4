@@ -34,7 +34,7 @@ public class PrincipalController extends Controller implements Initializable {
     @FXML
     private void actTareas(ActionEvent event) {
         this.closeWindow();
-        FlowController.getInstance().goViewInNoResizableWindow("Inicio", false, StageStyle.UTILITY);
+        FlowController.getInstance().goViewInNoResizableWindow("Inicio", false, StageStyle.DECORATED);
     }
 
     @FXML
