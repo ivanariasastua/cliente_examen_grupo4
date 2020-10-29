@@ -100,3 +100,11 @@ and open the template in the editor.
 .botonAccionPeligrosa{
     -fx-background-color: #cc0000;
 }
+
+.campostext{
+    -fx-font: bold 15px "Courier";
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 2 0;
+    -fx-text-fill: black;
+}
