@@ -40,7 +40,7 @@ public class PrincipalController extends Controller implements Initializable {
     @FXML
     private void actProvincias(ActionEvent event) {
         this.closeWindow();
-        FlowController.getInstance().goViewInNoResizableWindow("Demografia", false, StageStyle.UTILITY);
+        FlowController.getInstance().goViewInNoResizableWindow("Demografia", false, StageStyle.DECORATED);
     }
 
     @FXML
