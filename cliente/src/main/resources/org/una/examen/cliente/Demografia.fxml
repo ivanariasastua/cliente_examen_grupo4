@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="545.0" prefWidth="850.0" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.DemografiaController">
+   <left>
+      <VBox prefHeight="600.0" prefWidth="250.0" styleClass="vbox" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton onAction="#actProvincias" prefHeight="75.0" prefWidth="244.0" styleClass="botonMenu" text="Provincias">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="5.0" top="15.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton layoutX="10.0" layoutY="10.0" onAction="#actCantones" prefHeight="75.0" prefWidth="244.0" styleClass="botonMenu" text="Cantones">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="5.0" top="15.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton layoutX="10.0" layoutY="35.0" onAction="#actDistrito" prefHeight="75.0" prefWidth="244.0" styleClass="botonMenu" text="Distritos">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="5.0" top="15.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton layoutX="10.0" layoutY="60.0" onAction="#actUnidades" prefHeight="75.0" prefWidth="244.0" styleClass="botonMenu" text="Barrios, calles y similares">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="5.0" top="15.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton layoutX="10.0" layoutY="85.0" onAction="#actVerInformacion" prefHeight="75.0" prefWidth="244.0" styleClass="botonMenu" text="Ver Informacion">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="5.0" top="15.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <Pane fx:id="paneContenedor" prefHeight="545.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

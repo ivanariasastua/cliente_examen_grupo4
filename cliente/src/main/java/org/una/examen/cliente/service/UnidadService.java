@@ -49,6 +49,21 @@ public class UnidadService {
         }
     }
     
+    public Respuesta getByTipo(String tipo){
+        try{
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("tipo", tipo);
+            Request request = new Request("http://localhost:8989/unidad/tipo", "/{tipo}", parametros);
+            request.get();
+            if(request.isError())
+                return new Respuesta(Boolean.FALSE, request.getError());
+            List<UnidadDTO> result = (List<UnidadDTO>) request.readEntity(new GenericType<List<UnidadDTO>>(){});
+            return new Respuesta(Boolean.TRUE, "Unidades", result);
+        }catch(Exception ex){
+            return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
+        }
+    }
+    
     public Respuesta getByDistrito(String distrito){
         try{
             Map<String, Object> parametros = new HashMap<>();
@@ -115,7 +130,7 @@ public class UnidadService {
         }
     }
     
-    public Respuesta delete(Integer id){
+    public Respuesta delete(Long id){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);

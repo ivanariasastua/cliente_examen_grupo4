@@ -85,7 +85,7 @@ public class DistritoService {
         }
     }
     
-    public Respuesta delete(Integer id){
+    public Respuesta delete(Long id){
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);

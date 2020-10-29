@@ -61,3 +61,42 @@ and open the template in the editor.
     
 }
 
+.vbox{
+    -fx-background-color: #aba8a8;
+}
+
+.botonMenu{
+    -fx-background-color: #da6312;
+    -fx-text-fill: white;
+    -fx-font: bold italic 17px "Courier";
+    -fx-border-color: #da8b56;
+    -fx-border-width: 5 0 5 5;
+    -fx-border-radius: 25 0 0 25;
+    -fx-background-radius: 27 0 0 27;
+    
+}
+
+.boton{
+    -fx-text-fill: white;
+    -fx-font: bold italic 17px "Courier";
+}
+
+.botonPrimario{
+    -fx-background-color: royalblue;
+}
+
+.botonSecundario{
+    -fx-background-color: darkgray;
+}
+
+.botonTerciario{
+    -fx-background-color: #009900;
+}
+
+.botonEditar{
+    -fx-background-color: #ffc107;
+}
+
+.botonAccionPeligrosa{
+    -fx-background-color: #cc0000;
+}
