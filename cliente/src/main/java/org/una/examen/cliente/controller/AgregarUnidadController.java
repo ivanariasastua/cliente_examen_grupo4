@@ -106,7 +106,7 @@ public class AgregarUnidadController extends Controller implements Initializable
         lista.add("Barrio");
         lista.add("Calle");
         lista.add("Poblado");
-        lista.add("Urbanización")
+        lista.add("Urbanización");
         cbTipo.getItems().addAll(lista);
     }
     
