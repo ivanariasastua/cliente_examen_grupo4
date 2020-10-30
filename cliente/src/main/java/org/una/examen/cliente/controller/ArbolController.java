@@ -115,10 +115,6 @@ public class ArbolController extends Controller implements Initializable {
         return "";
     }
 
-
-
-    public void seleccionarTarea(JFXButton b, TareaDTO tarea) {
-
     public void seleccionarTarea(JFXButton b, TareaDTO tarea, ProyectoDTO proy) {
 
         b.setStyle(color);
