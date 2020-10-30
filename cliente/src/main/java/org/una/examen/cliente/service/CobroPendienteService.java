@@ -47,4 +47,17 @@ public class CobroPendienteService {
         }
         
     }
+    
+    public Respuesta borrarTodos(){
+        try{
+            Request request = new Request("http://localhost:8989/cobros_pendientes/");
+            request.delete();
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "Error al borrar los cobros");
+            }
+            return new Respuesta(true,"Se borrarón los cobros");
+        }catch(Exception ex){
+            return new Respuesta(false, ex.toString(), "No se estableció conexión con el servidor");
+        }
+    }
 }

@@ -73,6 +73,7 @@ public class ArbolController extends Controller implements Initializable {
         return "";
     }
 
+
     public void seleccionarTarea(JFXButton b, TareaDTO tarea) {
         b.setStyle(color);
         b.setOnMouseClicked(x -> {

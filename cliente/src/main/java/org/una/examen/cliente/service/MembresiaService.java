@@ -5,6 +5,8 @@
  */
 package org.una.examen.cliente.service;
 
+import java.util.List;
+import javax.ws.rs.core.GenericType;
 import org.una.examen.cliente.controller.util.Request;
 import org.una.examen.cliente.controller.util.Respuesta;
 import org.una.examen.cliente.dto.MembresiaDTO;
@@ -23,5 +25,20 @@ public class MembresiaService {
         }catch(Exception ex){
             return new Respuesta(false, ex.toString(), "No se estableció conexión con el servidor");
         }
+    }
+    
+    public Respuesta getAll(){
+        try{
+            Request request = new Request("http://localhost:8989/membresias/");
+            request.get();
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "Error al obtener las membresias");
+            }
+            List<MembresiaDTO> result = (List<MembresiaDTO>) request.readEntity(new GenericType<List<MembresiaDTO>>(){});
+            return new Respuesta(true, "Membresias", result);
+        }catch(Exception ex){
+            return new Respuesta(false, ex.toString(), "No se estableció conexión con el servidor");
+        }
+
     }
 }
