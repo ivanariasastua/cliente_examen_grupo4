@@ -49,6 +49,36 @@ public class DistritoService {
         }
     }
     
+    public Respuesta getByPoblacion(Integer poblacion){
+        try{
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("poblacion", poblacion);
+            Request request = new Request("http://localhost:8989/distrito/poblacion", "/{poblacion}", parametros);
+            request.get();
+            if(request.isError())
+                return new Respuesta(Boolean.FALSE, request.getError());
+            List<DistritoDTO> result = (List<DistritoDTO>) request.readEntity(new GenericType<List<DistritoDTO>>(){});
+            return new Respuesta(Boolean.TRUE, "Distritos", result);
+        }catch(Exception ex){
+            return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
+        }
+    }
+    
+    public Respuesta getByArea(Double area){
+        try{
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("area", area);
+            Request request = new Request("http://localhost:8989/distrito/area", "/{area}", parametros);
+            request.get();
+            if(request.isError())
+                return new Respuesta(Boolean.FALSE, request.getError());
+            List<DistritoDTO> result = (List<DistritoDTO>) request.readEntity(new GenericType<List<DistritoDTO>>(){});
+            return new Respuesta(Boolean.TRUE, "Distritos", result);
+        }catch(Exception ex){
+            return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
+        }
+    }
+    
     public Respuesta getByCanton(String canton){
         try{
             Map<String, Object> parametros = new HashMap<>();

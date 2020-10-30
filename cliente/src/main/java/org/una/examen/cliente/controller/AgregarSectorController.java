@@ -24,13 +24,10 @@ import org.una.examen.cliente.App;
 import org.una.examen.cliente.controller.util.AppContext;
 import org.una.examen.cliente.controller.util.Mensaje;
 import org.una.examen.cliente.controller.util.Respuesta;
-import org.una.examen.cliente.dto.CantomDTO;
 import org.una.examen.cliente.dto.CantonDTO;
-import org.una.examen.cliente.dto.DistritoDTO;
 import org.una.examen.cliente.dto.ProvinceDTO;
 import org.una.examen.cliente.dto.ProvinciaDTO;
 import org.una.examen.cliente.service.CantonService;
-import org.una.examen.cliente.service.DistritoService;
 import org.una.examen.cliente.service.ProvinciaService;
 
 /**
@@ -49,17 +46,14 @@ public class AgregarSectorController extends Controller implements Initializable
     
     private final ProvinciaService provinciaService = new ProvinciaService();
     private final CantonService cantonService = new CantonService();
-    private final DistritoService distritoService = new DistritoService();
     
     private Integer uso;
     private Boolean agregar;
     
     private ProvinciaDTO proviciaSelect = null;
     private CantonDTO cantonSelect = null;
-    private DistritoDTO distritoSelect = null;
     
     private ProvinceDTO prov = null;
-    private CantomDTO cant = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -74,16 +68,11 @@ public class AgregarSectorController extends Controller implements Initializable
                 proviciaSelect.setNombre(txtNombre.getText());
                 proviciaSelect.setCodigo(txtCodigo.getText());
                 res = provinciaService.guardar(proviciaSelect);
-            }else if(uso == 2){
+            }else{
                 cantonSelect.setNombre(txtNombre.getText());
                 cantonSelect.setCodigo(txtCodigo.getText());
                 cantonSelect.setProvincia(prov);
                 res = cantonService.guardar(cantonSelect);
-            }else{
-                distritoSelect.setNombre(txtNombre.getText());
-                distritoSelect.setCodigo(txtCodigo.getText());
-                distritoSelect.setCanton(cant);
-                res = distritoService.guardar(distritoSelect);
             }
             if(res.getEstado()){
                 Mensaje.show(Alert.AlertType.INFORMATION, "Guardar", "Registro guardado con éxito");
@@ -119,22 +108,13 @@ public class AgregarSectorController extends Controller implements Initializable
                 proviciaSelect = (ProvinciaDTO) AppContext.getInstance().get("select");
                 cargarDatos();
             }
-        }else if(uso == 2){
+        }else{
             txtSectorPertenece.setPromptText("Provincia");
             if(agregar){
                 cantonSelect = new CantonDTO(0L, "", "", null, null);
             }else{
                 cantonSelect = (CantonDTO) AppContext.getInstance().get("select");
                 cargarDatos();
-            }
-        }else{
-            txtSectorPertenece.setPromptText("Cantón");
-            if(agregar){
-                distritoSelect = new DistritoDTO(0L, "", "", null, null);
-            }else{
-                distritoSelect = (DistritoDTO) AppContext.getInstance().get("select");
-                cargarDatos();
-                
             }
         }
     }
@@ -143,19 +123,15 @@ public class AgregarSectorController extends Controller implements Initializable
         Boolean retorno = txtNombre.getText() != null && !txtNombre.getText().isEmpty() && txtCodigo.getText() != null && !txtCodigo.getText().isEmpty();
         if(uso == 1){
             return retorno;
-        }else if(uso == 2){
-            return retorno && prov != null;
         }else{
-            return retorno && cant != null;
+            return retorno && prov != null;
         }
     }
     
     private void Limpiar(){
         proviciaSelect = null;
         cantonSelect = null;
-        distritoSelect = null;
         prov = null;
-        cant = null;
         rowNombre.setPrefHeight(100);
         rowCodigo.setPrefHeight(100);
         rowSector.setPrefHeight(100);
@@ -169,9 +145,7 @@ public class AgregarSectorController extends Controller implements Initializable
     private void LimpiarCampos(){
         proviciaSelect = new ProvinciaDTO(0, "", "", null);
         cantonSelect = new CantonDTO(0L, "", "", null, null);
-        distritoSelect = new DistritoDTO(0L, "", "", null, null);
         prov = null;
-        cant = null;
         txtCodigo.clear();
         txtNombre.clear();
         txtSectorPertenece.clear();
@@ -182,16 +156,11 @@ public class AgregarSectorController extends Controller implements Initializable
         if(uso == 1){
             nombre = proviciaSelect.getNombre();
             codigo = proviciaSelect.getCodigo();
-        }else if(uso == 2){
+        }else{
             nombre = cantonSelect.getNombre();
             codigo = cantonSelect.getCodigo();
             txtSectorPertenece.setText(cantonSelect.getProvincia().getNombre());
             prov = cantonSelect.getProvincia();
-        }else{
-            nombre = distritoSelect.getNombre();
-            codigo = distritoSelect.getCodigo();
-            txtSectorPertenece.setText(distritoSelect.getCanton().getNombre());
-            cant = distritoSelect.getCanton();
         }
         txtNombre.setText(nombre);
         txtCodigo.setText(codigo);
@@ -200,11 +169,6 @@ public class AgregarSectorController extends Controller implements Initializable
     private ProvinceDTO convertFromPronvicia(ProvinciaDTO p){
         ProvinceDTO pro = new ProvinceDTO(p.getId(), p.getNombre(), p.getCodigo());
         return pro;
-    }
-    
-    private CantomDTO convertFromCanton(CantonDTO c){
-        CantomDTO can = new CantomDTO(c.getId(), c.getNombre(), c.getCodigo(), c.getProvincia());
-        return can;
     }
 
     @FXML
@@ -229,15 +193,6 @@ public class AgregarSectorController extends Controller implements Initializable
             if(AppContext.getInstance().get("select") != null){
                 prov = convertFromPronvicia((ProvinciaDTO) AppContext.getInstance().get("select"));
                 txtSectorPertenece.setText(prov.getNombre());
-            }
-        }else{
-            AppContext.getInstance().set("Uso2", 6);
-            controller.initialize();
-            controller.initEvents();
-            stage.showAndWait();
-            if(AppContext.getInstance().get("select") != null){
-                cant = convertFromCanton((CantonDTO) AppContext.getInstance().get("select"));
-                txtSectorPertenece.setText(cant.getNombre());
             }
         }
         System.out.println("Salio");
