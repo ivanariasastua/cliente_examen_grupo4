@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -69,6 +70,7 @@ public class AgregarUnidadController extends Controller implements Initializable
                 select.setArea(Double.parseDouble(txtArea.getText()));
                 select.setPoblacion(Integer.parseInt(txtPoblacion.getText()));
                 select.setTipo(cbTipo.getSelectionModel().getSelectedItem());
+                select.setDistrito(distrito);
                 Respuesta res = service.guardar(select);
                 if(res.getEstado()){
                     Limpiar();
@@ -79,30 +81,6 @@ public class AgregarUnidadController extends Controller implements Initializable
             }else{
                 Mensaje.show(Alert.AlertType.WARNING, "Guardar", "Los datos de la población o el área no son lógicos");
             }
-        }
-    }
-
-    @FXML
-    private void actBuscarSector(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("BuscarSector.fxml"));
-        loader.load();
-        Controller controller = loader.getController();
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setTitle("Cliente Examen");
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(Boolean.FALSE);
-        stage.initStyle(StageStyle.DECORATED);
-        stage.sizeToScene();
-        controller.setStage(stage);
-        AppContext.getInstance().set("Uso2", 7);
-        controller.initialize();
-        controller.initEvents();
-        stage.showAndWait();
-        if(AppContext.getInstance().get("select") != null){
-            distrito = convertFromDistrito((DistritoDTO) AppContext.getInstance().get("select"));
-            txtSectorPertenece.setText(distrito.getNombre());
         }
     }
 
@@ -127,7 +105,8 @@ public class AgregarUnidadController extends Controller implements Initializable
         List<String> lista = new ArrayList<>();
         lista.add("Barrio");
         lista.add("Calle");
-        lista.add("Urbanización");
+        lista.add("Poblado");
+        lista.add("Urbanización")
         cbTipo.getItems().addAll(lista);
     }
     
@@ -137,7 +116,7 @@ public class AgregarUnidadController extends Controller implements Initializable
         txtNombre.clear();
         txtPoblacion.clear();
         txtSectorPertenece.clear();
-        select = null;
+        select = new UnidadDTO(0L, "", "", "", 0, 0D, null);
         distrito = null;
         cbTipo.getSelectionModel().select(null);
     }
@@ -160,5 +139,29 @@ public class AgregarUnidadController extends Controller implements Initializable
     private DistrictDTO convertFromDistrito(DistritoDTO distrito){
         DistrictDTO d = new DistrictDTO(distrito.getId(), distrito.getNombre(), distrito.getCodigo(), distrito.getCanton());
         return d;
+    }
+
+    @FXML
+    private void actBuscarSector(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("BuscarSector.fxml"));
+        loader.load();
+        Controller controller = loader.getController();
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setTitle("Cliente Examen");
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(Boolean.FALSE);
+        stage.initStyle(StageStyle.DECORATED);
+        stage.sizeToScene();
+        controller.setStage(stage);
+        AppContext.getInstance().set("Uso2", 7);
+        controller.initialize();
+        controller.initEvents();
+        stage.showAndWait();
+        if(AppContext.getInstance().get("select") != null){
+            distrito = convertFromDistrito((DistritoDTO) AppContext.getInstance().get("select"));
+            txtSectorPertenece.setText(distrito.getNombre());
+        }
     }
 }
