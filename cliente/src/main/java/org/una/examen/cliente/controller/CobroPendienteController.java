@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import org.una.examen.cliente.controller.util.Respuesta;
 import org.una.examen.cliente.service.ClienteService;
@@ -46,6 +47,8 @@ public class CobroPendienteController extends Controller implements Initializabl
     private JFXComboBox<MembresiaDTO> cbMembresia;
     @FXML
     private JFXTreeView<ClienteDTO> treeCobrosPendientes;
+    @FXML
+    private Label lbAviso;
     
     Respuesta respuesta;
     ClienteService clienteService;
@@ -300,7 +303,6 @@ public class CobroPendienteController extends Controller implements Initializabl
 
     @FXML
     private void actGenerarCobros(ActionEvent event) {
-        
         respuesta = cobroService.borrarTodos();
         respuesta = clienteService.getAll();
         
@@ -323,5 +325,6 @@ public class CobroPendienteController extends Controller implements Initializabl
         
         treeCobrosPendientes.setRoot(null);
         mostrarArbolJerarquico(clientes);
+        lbAviso.setText("Cobros generador");
     }
 }
