@@ -280,6 +280,7 @@ public class BuscarSectorController extends Controller implements Initializable 
 
     @FXML
     private void actAgregar(ActionEvent event) {
+        AppContext.getInstance().set("select", null);
         AppContext.getInstance().set("Agregar", true);
         if(uso < 3)
             FlowController.getInstance().goViewInNoResizableWindow("AgregarSector", Boolean.FALSE, StageStyle.DECORATED);
