@@ -308,7 +308,11 @@ public class BuscarSectorController extends Controller implements Initializable 
             colNombre.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getNombre()));
             TableColumn<ProvinciaDTO, String> colCodigo = new TableColumn<>("Código");
             colCodigo.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getCodigo()));
-            tabla.getColumns().addAll(colNombre, colCodigo);
+            TableColumn<ProvinciaDTO, String> colArea = new TableColumn<>("Área");
+            colArea.setCellValueFactory((p) -> new SimpleStringProperty(calcularAreaProvincias(p.getValue()).toString()));
+            TableColumn<ProvinciaDTO, String> colPoblacion = new TableColumn<>("Población");
+            colPoblacion.setCellValueFactory((p) -> new SimpleStringProperty(calcularPoblacionProvincias(p.getValue()).toString()));
+            tabla.getColumns().addAll(colNombre, colCodigo, colArea, colPoblacion);
         }else if(uso == 2 || uso2 == 6){
             lblTitulo.setText("Buscar cantones");
             TableColumn<CantonDTO, String> colNombre = new TableColumn<>("Nombre");
@@ -317,7 +321,11 @@ public class BuscarSectorController extends Controller implements Initializable 
             colCodigo.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getCodigo()));
             TableColumn<CantonDTO, String> colProvincia = new TableColumn<>("Provincia");
             colProvincia.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getProvincia().getNombre()));
-            tabla.getColumns().addAll(colNombre, colCodigo, colProvincia);
+            TableColumn<CantonDTO, String> colArea = new TableColumn<>("Área");
+            colArea.setCellValueFactory((p) -> new SimpleStringProperty(calcularAreaCantones(p.getValue()).toString()));
+            TableColumn<CantonDTO, String> colPoblacion = new TableColumn<>("Población");
+            colPoblacion.setCellValueFactory((p) -> new SimpleStringProperty(calcularPoblacionCantones(p.getValue()).toString()));
+            tabla.getColumns().addAll(colNombre, colCodigo, colArea, colPoblacion, colProvincia);
             items.add("Provincia");
         }else if(uso == 3 || uso2 == 7){
             lblTitulo.setText("Buscar distritos");
@@ -396,5 +404,46 @@ public class BuscarSectorController extends Controller implements Initializable 
                 Mensaje.show(Alert.AlertType.WARNING, "Seleccionar unidad de distrito", "No ha seleccionado una unidad de distrito");
             }
         }
+    }
+    
+    public Double calcularAreaProvincias(ProvinciaDTO lista){
+        Double area = 0.0;
+        if(lista.getCantones() != null){
+            for(CantonDTO canton :  lista.getCantones()){
+                area += calcularAreaCantones(canton);
+            }
+        }
+        return area;
+        
+    }
+    
+    public Double calcularAreaCantones(CantonDTO lista){
+        Double area = 0.0;
+        if(lista.getDistritos() != null){
+            for(DistritoDTO distrito : lista.getDistritos()){
+                area += distrito.getArea();
+            }
+        }
+        return area;
+    }
+    
+    public Integer calcularPoblacionProvincias(ProvinciaDTO lista){
+        Integer poblacion = 0;
+        if(lista.getCantones() != null){
+            for(CantonDTO canton :  lista.getCantones()){
+                poblacion += calcularPoblacionCantones(canton);
+            }
+        }
+        return poblacion;
+    }
+    
+    public Integer calcularPoblacionCantones(CantonDTO lista){
+        Integer poblacion = 0;
+        if(lista.getDistritos() != null){
+            for(DistritoDTO distrito : lista.getDistritos()){
+                poblacion += distrito.getPoblacion();
+            }
+        }
+        return poblacion;
     }
 }

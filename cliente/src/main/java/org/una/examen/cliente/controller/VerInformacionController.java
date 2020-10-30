@@ -48,7 +48,7 @@ public class VerInformacionController extends Controller implements Initializabl
     @FXML
     private JFXRadioButton rbPoblacion;
     
-    //private List<Demografia> items;
+    private List<Demografia> elementos;
  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,6 +57,9 @@ public class VerInformacionController extends Controller implements Initializabl
 
     @FXML
     private void actOrdenar(ActionEvent event) {
+        elementos = ordenarDatos(elementos);
+        tvArbol.getChildrenUnmodifiable().clear();
+        mostrarTreeView(elementos);
     }
 
     @Override
@@ -66,6 +69,7 @@ public class VerInformacionController extends Controller implements Initializabl
     
     @FXML
     private void actActualizarArbol(ActionEvent event) {
+        Mensaje.showProgressDialog(taskAllData(), "Ver Informacion", "Formando arbol");
     }
     
     private Task taskAllData(){
@@ -170,7 +174,7 @@ public class VerInformacionController extends Controller implements Initializabl
     }
     
     private void mostrarTreeView(List<Demografia> lista){
-        //items = lista;
+        elementos = lista;
         Platform.runLater( () -> {
             TreeItem root = new TreeItem<>("Provincias");
             tvArbol.setRoot(root);
