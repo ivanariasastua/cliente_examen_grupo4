@@ -22,4 +22,5 @@ public class ClienteDTO {
     private String nombre;
     private String cedula;
     private List<CobroPendienteDTO> cobros = new ArrayList();
+    private MembresiaDTO membresia;
 }

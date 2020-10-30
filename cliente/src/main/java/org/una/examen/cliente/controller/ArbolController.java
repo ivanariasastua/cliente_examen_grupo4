@@ -10,7 +10,9 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -99,16 +101,26 @@ public class ArbolController extends Controller implements Initializable {
         cargarArbol();
     }
 
+    public String formatoFechas(Date date){
+        LocalDate fecha = DateUtils.asLocalDate(date);
+        return String.valueOf(fecha);
+    }
+    
     public String llenarNotas(TareaDTO tarea) {
         if (tarea != null) {
-            return tarea.getNombre() + "\n\nFecha de inicio: " + tarea.getFechaInicio()
-                    + "\nFecha de finalizacion: " + tarea.getFechaFinalizacion() + "\nImportancia: " + tarea.getImportancia().toString() + "\nPorcentaje de avance: "
+            return tarea.getNombre() + "\n\nFecha de inicio: " + formatoFechas(tarea.getFechaInicio())
+                    + "\nFecha de finalizacion: " + formatoFechas(tarea.getFechaFinalizacion()) + "\nImportancia: " + tarea.getImportancia().toString() + "\nPorcentaje de avance: "
                     + tarea.getPorcentajeAvance().toString() + "\nDescripcion: " + tarea.getDescripcion();
         }
         return "";
     }
 
+
+
+    public void seleccionarTarea(JFXButton b, TareaDTO tarea) {
+
     public void seleccionarTarea(JFXButton b, TareaDTO tarea, ProyectoDTO proy) {
+
         b.setStyle(color);
         b.setOnMouseClicked(x -> {
             if (tarea.getNombre() != null) {

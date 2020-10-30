@@ -19,11 +19,11 @@ import lombok.ToString;
 public class CobroPendienteDTO {
     
     private Integer id;
-    @JsonbDateFormat(value = "yyyy")
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date anio;
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date fechaVencimiento;
     private Float monto;
+    private Integer periodo;
     private ClienteDTO cliente;
-    private MembresiaDTO membresia;
 }

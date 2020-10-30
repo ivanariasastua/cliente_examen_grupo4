@@ -15,12 +15,16 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class MembresiaDTO {
     
     private Long id;
     private Float monto;
     private String descripcion;
     private Integer periodicidad;
-    private List<CobroPendienteDTO> cobros = new ArrayList();
+    private List<ClienteDTO> clientes = new ArrayList();
+    
+    @Override
+    public String toString(){
+        return this.descripcion +". Monto: "+String.valueOf(this.monto);
+    }
 }
