@@ -79,36 +79,6 @@ public class UnidadService {
         }
     }
     
-    public Respuesta getByPoblacion(Integer poblacion){
-        try{
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("poblacion", poblacion);
-            Request request = new Request("http://localhost:8989/unidad/poblacion", "/{poblacion}", parametros);
-            request.get();
-            if(request.isError())
-                return new Respuesta(Boolean.FALSE, request.getError());
-            List<UnidadDTO> result = (List<UnidadDTO>) request.readEntity(new GenericType<List<UnidadDTO>>(){});
-            return new Respuesta(Boolean.TRUE, "Unidades", result);
-        }catch(Exception ex){
-            return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
-        }
-    }
-    
-    public Respuesta getByArea(Double area){
-        try{
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("area", area);
-            Request request = new Request("http://localhost:8989/unidad/area", "/{area}", parametros);
-            request.get();
-            if(request.isError())
-                return new Respuesta(Boolean.FALSE, request.getError());
-            List<UnidadDTO> result = (List<UnidadDTO>) request.readEntity(new GenericType<List<UnidadDTO>>(){});
-            return new Respuesta(Boolean.TRUE, "Unidades", result);
-        }catch(Exception ex){
-            return new Respuesta(false, ex.toString(), "No puedo establecerce conexion con el servidor");
-        }
-    }
-    
     public Respuesta guardar(UnidadDTO dto){
         try{
             Request request;

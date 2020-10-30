@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.una.examen.cliente.App;
 import org.una.examen.cliente.controller.util.AppContext;
-import org.una.examen.cliente.controller.util.Formato;
 import org.una.examen.cliente.controller.util.Mensaje;
 import org.una.examen.cliente.controller.util.Respuesta;
 import org.una.examen.cliente.dto.DistrictDTO;
@@ -43,8 +42,6 @@ public class AgregarUnidadController extends Controller implements Initializable
     @FXML private RowConstraints rowSector;
     @FXML private JFXTextField txtNombre;
     @FXML private JFXTextField txtCodigo;
-    @FXML private JFXTextField txtPoblacion;
-    @FXML private JFXTextField txtArea;
     @FXML private JFXTextField txtSectorPertenece;
     @FXML private JFXComboBox<String> cbTipo;
 
@@ -62,24 +59,16 @@ public class AgregarUnidadController extends Controller implements Initializable
     @FXML
     private void actGuardar(ActionEvent event) {
         if(validarCampos()){
-            Integer p = Integer.parseInt(txtPoblacion.getText());
-            Double d = Double.parseDouble(txtArea.getText());
-            if(p > 0 && d > 1D){
-                select.setNombre(txtNombre.getText());
-                select.setCodigo(txtCodigo.getText());
-                select.setArea(Double.parseDouble(txtArea.getText()));
-                select.setPoblacion(Integer.parseInt(txtPoblacion.getText()));
-                select.setTipo(cbTipo.getSelectionModel().getSelectedItem());
-                select.setDistrito(distrito);
-                Respuesta res = service.guardar(select);
-                if(res.getEstado()){
-                    Limpiar();
-                    Mensaje.show(Alert.AlertType.INFORMATION, "Guardar", "Se registro existosamente");
-                }else{
-                    Mensaje.show(Alert.AlertType.ERROR, "Guardar", res.getMensaje());
-                }
+            select.setNombre(txtNombre.getText());
+            select.setCodigo(txtCodigo.getText());
+            select.setTipo(cbTipo.getSelectionModel().getSelectedItem());
+            select.setDistrito(distrito);
+            Respuesta res = service.guardar(select);
+            if(res.getEstado()){
+                Limpiar();
+                Mensaje.show(Alert.AlertType.INFORMATION, "Guardar", "Se registro existosamente");
             }else{
-                Mensaje.show(Alert.AlertType.WARNING, "Guardar", "Los datos de la población o el área no son lógicos");
+                Mensaje.show(Alert.AlertType.ERROR, "Guardar", res.getMensaje());
             }
         }
     }
@@ -93,15 +82,11 @@ public class AgregarUnidadController extends Controller implements Initializable
     private Boolean validarCampos(){
         return txtNombre.getText() != null && !txtNombre.getText().isEmpty() &&
                txtCodigo.getText() != null && !txtCodigo.getText().isEmpty() &&
-               txtArea.getText() != null && !txtArea.getText().isEmpty() &&
-               txtPoblacion.getText() != null && !txtPoblacion.getText().isEmpty() &&
                cbTipo.getSelectionModel().getSelectedItem() != null &&
                distrito != null;
     }
     
     private void initNodes(){
-        txtArea.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        txtPoblacion.setTextFormatter(Formato.getInstance().integerFormat());
         List<String> lista = new ArrayList<>();
         lista.add("Barrio");
         lista.add("Calle");
@@ -111,25 +96,21 @@ public class AgregarUnidadController extends Controller implements Initializable
     }
     
     private void Limpiar(){
-        txtArea.clear();
         txtCodigo.clear();
         txtNombre.clear();
-        txtPoblacion.clear();
         txtSectorPertenece.clear();
-        select = new UnidadDTO(0L, "", "", "", 0, 0D, null);
+        select = new UnidadDTO(0L, "", "", "", null);
         distrito = null;
         cbTipo.getSelectionModel().select(null);
     }
     
     private void cargarDatos(){
         if(AppContext.getInstance().get("select") == null){
-            select = new UnidadDTO(0L, "", "", "", 0, 0D, null);
+            select = new UnidadDTO(0L, "", "", "", null);
         }else{
             select = (UnidadDTO) AppContext.getInstance().get("select");
             txtNombre.setText(select.getNombre());
             txtCodigo.setText(select.getCodigo());
-            txtArea.setText(select.getArea().toString());
-            txtPoblacion.setText(select.getPoblacion().toString());
             cbTipo.getSelectionModel().select(select.getTipo());
             txtSectorPertenece.setText(select.getDistrito().getNombre());
             distrito = select.getDistrito();

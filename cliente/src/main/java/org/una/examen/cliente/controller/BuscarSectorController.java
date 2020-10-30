@@ -68,6 +68,7 @@ public class BuscarSectorController extends Controller implements Initializable 
 
     @FXML
     private void actBuscar(ActionEvent event) {
+        tabla.setDisable(true);
         if(cbFiltrar.getSelectionModel().getSelectedItem() != null && (txtBuscar.getText() != null && !txtBuscar.getText().isEmpty())){
             tabla.getItems().clear();
             String filtro = cbFiltrar.getSelectionModel().getSelectedItem(), buscar = txtBuscar.getText(), resultado;
@@ -94,6 +95,22 @@ public class BuscarSectorController extends Controller implements Initializable 
                     res = distritoService.getByNombre(buscar);
                 }else if(filtro.equals("Código")){
                     res = distritoService.getByCodigo(buscar);
+                }else if(filtro.equals("Población")){
+                    try{
+                        Integer poblacion = Integer.parseInt(buscar);
+                        res = distritoService.getByPoblacion(poblacion);
+                    }catch(NumberFormatException ex){
+                        resultado = null;
+                        Mensaje.show(Alert.AlertType.WARNING, "Filtrar por población", "El valor ingresado no es valido debe ser numérico");
+                    }
+                }else if(filtro.equals("Área")){
+                    try{
+                        Double area = Double.parseDouble(buscar);
+                        res = distritoService.getByArea(area);
+                    }catch(NumberFormatException ex){
+                        resultado = null;
+                        Mensaje.show(Alert.AlertType.WARNING, "Filtrar por área", "El valor ingresado no es valido debe ser numérico");
+                    }
                 }else{
                     res = distritoService.getByCanton(buscar);
                 }
@@ -103,22 +120,6 @@ public class BuscarSectorController extends Controller implements Initializable 
                     res = unidadService.getByNombre(buscar);
                 }else if(filtro.equals("Código")){
                     res = unidadService.getByCodigo(buscar);
-                }else if(filtro.equals("Población")){
-                    try{
-                        Integer poblacion = Integer.parseInt(buscar);
-                        res = unidadService.getByPoblacion(poblacion);
-                    }catch(NumberFormatException ex){
-                        resultado = null;
-                        Mensaje.show(Alert.AlertType.WARNING, "Filtrar por población", "El valor ingresado no es valido debe ser numérico");
-                    }
-                }else if(filtro.equals("Área")){
-                    try{
-                        Double area = Double.parseDouble(buscar);
-                        res = unidadService.getByArea(area);
-                    }catch(NumberFormatException ex){
-                        resultado = null;
-                        Mensaje.show(Alert.AlertType.WARNING, "Filtrar por área", "El valor ingresado no es valido debe ser numérico");
-                    }
                 }else if(filtro.equals("Tipo")){
                     res = unidadService.getByTipo(buscar);
                 }else{
@@ -146,6 +147,7 @@ public class BuscarSectorController extends Controller implements Initializable 
             }
             cbFiltrar.getSelectionModel().select(null);
         }
+        tabla.setDisable(false);
     }
 
     @FXML
@@ -195,7 +197,7 @@ public class BuscarSectorController extends Controller implements Initializable 
             }
         }else if(uso == 3){
             if(distritoSelect != null){
-                FlowController.getInstance().goViewInNoResizableWindow("AgregarSector", Boolean.FALSE, StageStyle.DECORATED);
+                FlowController.getInstance().goViewInNoResizableWindow("AgregarDistrito", Boolean.FALSE, StageStyle.DECORATED);
             }else{
                 Mensaje.show(Alert.AlertType.ERROR, "Editar distrito", "No ha seleccionado una distrito");
             }
@@ -279,10 +281,12 @@ public class BuscarSectorController extends Controller implements Initializable 
     @FXML
     private void actAgregar(ActionEvent event) {
         AppContext.getInstance().set("Agregar", true);
-        if(uso != 4)
+        if(uso < 3)
             FlowController.getInstance().goViewInNoResizableWindow("AgregarSector", Boolean.FALSE, StageStyle.DECORATED);
-        else
+        else if(uso == 4)
             FlowController.getInstance().goViewInNoResizableWindow("AgregarUnidad", Boolean.FALSE, StageStyle.DECORATED);
+        else
+            FlowController.getInstance().goViewInNoResizableWindow("AgregarDistrito", Boolean.FALSE, StageStyle.DECORATED);
     }
 
     @Override
@@ -321,26 +325,26 @@ public class BuscarSectorController extends Controller implements Initializable 
             colNombre.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getNombre()));
             TableColumn<DistritoDTO, String> colCodigo = new TableColumn<>("Código");
             colCodigo.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getCodigo()));
+            TableColumn<DistritoDTO, String> colPoblacion = new TableColumn<>("Población");
+            colPoblacion.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getPoblacion().toString()));
+            TableColumn<DistritoDTO, String> colArea = new TableColumn<>("Área");
+            colArea.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getArea().toString()));
             TableColumn<DistritoDTO, String> colCanton = new TableColumn<>("Cantón");
             colCanton.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getCanton().getNombre()));
-            tabla.getColumns().addAll(colNombre, colCodigo, colCanton);
+            tabla.getColumns().addAll(colNombre, colCodigo,  colPoblacion, colArea, colCanton);
             items.add("Cantón");
+            items.add("Población");
+            items.add("Área");
         }else{
             lblTitulo.setText("Buscar Unidades de distrito");
             TableColumn<UnidadDTO, String> colNombre = new TableColumn<>("Nombre");
             colNombre.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getNombre()));
             TableColumn<UnidadDTO, String> colCodigo = new TableColumn<>("Código");
             colCodigo.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getCodigo()));
-            TableColumn<UnidadDTO, String> colPoblacion = new TableColumn<>("Población");
-            colPoblacion.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getPoblacion().toString()));
-            TableColumn<UnidadDTO, String> colArea = new TableColumn<>("Área");
-            colArea.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getArea().toString()));
             TableColumn<UnidadDTO, String> colDistrito = new TableColumn<>("Distrito");
             colDistrito.setCellValueFactory((p) -> new SimpleStringProperty(p.getValue().getDistrito().getNombre()));
-            tabla.getColumns().addAll(colNombre, colCodigo, colPoblacion, colArea, colDistrito);
+            tabla.getColumns().addAll(colNombre, colCodigo, colDistrito);
             items.add("Tipo");
-            items.add("Población");
-            items.add("Área");
             items.add("Distrito");
         }
         cbFiltrar.getItems().clear();
