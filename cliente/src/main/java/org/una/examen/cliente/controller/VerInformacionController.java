@@ -58,7 +58,7 @@ public class VerInformacionController extends Controller implements Initializabl
     @FXML
     private void actOrdenar(ActionEvent event) {
         elementos = ordenarDatos(elementos);
-        tvArbol.getChildrenUnmodifiable().clear();
+        tvArbol.setRoot(null);
         mostrarTreeView(elementos);
     }
 
