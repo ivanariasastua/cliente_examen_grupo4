@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeView;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -54,6 +55,8 @@ public class CobroPendienteController extends Controller implements Initializabl
     MembresiaDTO membresia;
     CobroPendienteDTO cobro;
     Map<String,Integer> periodicidad;
+    String fecha = "yyyy-MM-dd";
+    SimpleDateFormat formatoFecha = new SimpleDateFormat(fecha);
     
     @Override
     public void initialize() {
@@ -241,7 +244,7 @@ public class CobroPendienteController extends Controller implements Initializabl
             root.getChildren().add(tItem);
             c.getCobros().stream().forEach(cob->{
                 TreeItem<String> tItemcob = new TreeItem<>(String.valueOf("Monto: "+ cob.getMonto()+"\n" 
-                +"Fecha de vencimiento: "+ cob.getFechaVencimiento()+"\n"
+                +"Fecha de vencimiento: "+ formatoFecha.format(cob.getFechaVencimiento())+"\n"
                 +obtenerPeriodicidad(cob.getPeriodo())));
                 tItem.getChildren().add(tItemcob);
             });
