@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.una.examen.cliente.App;
@@ -50,6 +51,8 @@ public class AgregarDistritoController extends Controller implements Initializab
     private DistritoDTO select = null;
     private final DistritoService service = new DistritoService();
     private CantomDTO canton = null;
+    @FXML
+    private GridPane gpDistrito;
 
     
     @Override
