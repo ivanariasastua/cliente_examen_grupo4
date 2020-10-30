@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane prefHeight="665.0" prefWidth="480.0" styleClass="raiz" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.AgregarUnidadController">
+   <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="85.0" prefHeight="85.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="85.0" prefHeight="85.0" vgrow="SOMETIMES" />
+      <RowConstraints fx:id="rowSector" maxHeight="100.0" minHeight="85.0" prefHeight="85.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="85.0" prefHeight="85.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="85.0" prefHeight="85.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="85.0" prefHeight="85.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="85.0" prefHeight="85.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <JFXTextField fx:id="txtNombre" labelFloat="true" prefHeight="50.0" promptText="Nombre" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCodigo" labelFloat="true" layoutX="10.0" layoutY="80.0" prefHeight="50.0" promptText="Codigo" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXButton onAction="#actGuardar" prefHeight="50.0" prefWidth="510.0" text="Guardar" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+         <styleClass>
+            <String fx:value="botonTerciario" />
+            <String fx:value="boton" />
+         </styleClass>
+      </JFXButton>
+      <JFXTextField fx:id="txtPoblacion" labelFloat="true" layoutX="10.0" layoutY="134.0" prefHeight="50.0" promptText="Población" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXTextField fx:id="txtArea" labelFloat="true" layoutX="10.0" layoutY="233.0" prefHeight="50.0" promptText="Área" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSectorPertenece" labelFloat="true" layoutX="10.0" layoutY="274.0" onAction="#actBuscarSector" prefHeight="50.0" promptText="Distrito" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <Label prefHeight="91.0" prefWidth="529.0" text="Registro y edicción de información">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </Label>
+      <JFXComboBox fx:id="cbTipo" prefHeight="50.0" prefWidth="557.0" promptText="Tipo de Unidad de distrito" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXComboBox>
+   </children>
+</GridPane>

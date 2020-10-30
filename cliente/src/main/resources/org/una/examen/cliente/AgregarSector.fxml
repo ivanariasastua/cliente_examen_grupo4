@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane prefHeight="461.0" prefWidth="480.0" stylesheets="@Tema.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.examen.cliente.controller.AgregarSectorController">
+   <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints fx:id="rowNombre" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+      <RowConstraints fx:id="rowCodigo" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+      <RowConstraints fx:id="rowSector" maxHeight="100.0" minHeight="0.0" prefHeight="100.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <JFXTextField fx:id="txtNombre" labelFloat="true" prefHeight="50.0" promptText="Nombre" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXTextField fx:id="txtCodigo" labelFloat="true" layoutX="10.0" layoutY="80.0" prefHeight="50.0" promptText="Codigo" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXButton onAction="#actGuardar" prefHeight="50.0" prefWidth="510.0" text="Guardar" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+         <styleClass>
+            <String fx:value="boton" />
+            <String fx:value="botonTerciario" />
+         </styleClass></JFXButton>
+      <JFXTextField fx:id="txtSectorPertenece" labelFloat="true" layoutX="10.0" layoutY="274.0" onMouseClicked="#actBuscarSector" prefHeight="50.0" promptText="Distrito" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <Label prefHeight="91.0" prefWidth="529.0" text="Registro y edicción de información">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </Label>
+   </children>
+</GridPane>

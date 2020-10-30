@@ -36,7 +36,7 @@ public class ProvinciaService {
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("nombre", nombre);
-            Request request = new Request("http://localhost:8989/provincia", "/{nombre}", parametros);
+            Request request = new Request("http://localhost:8989/provincia/nombre", "/{nombre}", parametros);
             request.get();
             if(request.isError())
                 return new Respuesta(Boolean.FALSE, request.getError());
@@ -51,7 +51,7 @@ public class ProvinciaService {
         try{
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("codigo", codigo);
-            Request request = new Request("http://localhost:8989/provincia", "/{codigo}", parametros);
+            Request request = new Request("http://localhost:8989/provincia/codigo", "/{codigo}", parametros);
             request.get();
             if(request.isError())
                 return new Respuesta(Boolean.FALSE, request.getError());

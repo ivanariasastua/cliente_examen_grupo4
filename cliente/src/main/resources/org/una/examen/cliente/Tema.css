@@ -21,6 +21,17 @@ and open the template in the editor.
     -fx-background-radius: 0 25 0 25;
     -fx-border-radius: 0 25 0 25;
 }
+.botonPrincipal:hover{
+    -fx-background-color: #e49d6e;
+    -fx-text-fill: white;
+    -fx-font: bold italic 35px "Courier";
+    -fx-border-color: #fa8e44;
+    -fx-border-width:  0 0 8 8;
+    -fx-background-radius: 0 25 0 25;
+    -fx-border-radius: 0 25 0 25;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
 
 .tab{
     -fx-pref-height: 50px;
@@ -61,3 +72,50 @@ and open the template in the editor.
     
 }
 
+.vbox{
+    -fx-background-color: #aba8a8;
+}
+
+.botonMenu{
+    -fx-background-color: #da6312;
+    -fx-text-fill: white;
+    -fx-font: bold italic 17px "Courier";
+    -fx-border-color: #da8b56;
+    -fx-border-width: 5 0 5 5;
+    -fx-border-radius: 25 0 0 25;
+    -fx-background-radius: 27 0 0 27;
+    
+}
+
+.boton{
+    -fx-text-fill: white;
+    -fx-font: bold italic 17px "Courier";
+}
+
+.botonPrimario{
+    -fx-background-color: royalblue;
+}
+
+.botonSecundario{
+    -fx-background-color: darkgray;
+}
+
+.botonTerciario{
+    -fx-background-color: #009900;
+}
+
+.botonEditar{
+    -fx-background-color: #ffc107;
+}
+
+.botonAccionPeligrosa{
+    -fx-background-color: #cc0000;
+}
+
+.campostext{
+    -fx-font: bold 15px "Courier";
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 2 0;
+    -fx-text-fill: black;
+}
