@@ -20,7 +20,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <JFXTreeView fx:id="treeCobrosPendientes" stylesheets="@Tema.css" BorderPane.alignment="CENTER">
+                        <JFXTreeView fx:id="treeCobrosPendientes" prefHeight="335.0" prefWidth="800.0" stylesheets="@Tema.css" BorderPane.alignment="CENTER">
                            <padding>
                               <Insets left="10.0" right="10.0" />
                            </padding></JFXTreeView>
@@ -33,14 +33,23 @@
                         </JFXButton>
                      </bottom>
                      <top>
-                        <Label text="Cobros Pendientes" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
+                        <VBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Cobros Pendientes">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbAviso" text="Generar los cobros puede tardar varios minutos">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
                            <BorderPane.margin>
-                              <Insets bottom="5.0" top="5.0" />
+                              <Insets top="10.0" />
                            </BorderPane.margin>
-                        </Label>
+                        </VBox>
                      </top>
                   </BorderPane>
                </content>
