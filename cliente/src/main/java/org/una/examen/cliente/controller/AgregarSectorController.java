@@ -167,9 +167,9 @@ public class AgregarSectorController extends Controller implements Initializable
     }
     
     private void LimpiarCampos(){
-        proviciaSelect = null;
-        cantonSelect = null;
-        distritoSelect = null;
+        proviciaSelect = new ProvinciaDTO(0, "", "", null);
+        cantonSelect = new CantonDTO(0L, "", "", null, null);
+        distritoSelect = new DistritoDTO(0L, "", "", null, null);
         prov = null;
         cant = null;
         txtCodigo.clear();
@@ -204,7 +204,7 @@ public class AgregarSectorController extends Controller implements Initializable
     
     private CantomDTO convertFromCanton(CantonDTO c){
         CantomDTO can = new CantomDTO(c.getId(), c.getNombre(), c.getCodigo(), c.getProvincia());
-        return cant;
+        return can;
     }
 
     @FXML
